@@ -5,6 +5,8 @@ import joblib
 
 df = pd.read_parquet("data/dataset.parquet")
 
+print(df["target_win"].value_counts(normalize=True))  # 👈 QUI
+
 features = [
     "dist_to_tp_at_entry",
     "mae_1m"
