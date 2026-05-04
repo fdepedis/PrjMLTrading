@@ -1,14 +1,14 @@
 import duckdb
 import pandas as pd
 
-DB_PATH = "E:\\Production\\ProjectTradingPROD\\PrjDashboardTrading\\data\\duckdb\\analytics_prod.duckdb"
+from config.settings import DB_PATH, PARQUET_PATH
 
 def build_dataset():
     con = duckdb.connect(DB_PATH)
 
     df = con.execute("""
         SELECT *
-        FROM v_trade_features
+        FROM v_trade_features_ml
         WHERE r_mult IS NOT NULL
           AND entry_price IS NOT NULL
     """).df()
@@ -22,7 +22,7 @@ def build_dataset():
         "mae_1m"
     ])
 
-    df.to_parquet("data/dataset.parquet", index=False)
+    df.to_parquet(PARQUET_PATH, index=False)
 
     print(f"Dataset salvato: {len(df)} righe")
 

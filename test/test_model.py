@@ -1,7 +1,7 @@
 import joblib
 import pandas as pd
 
-model = joblib.load("models/model_v1.pkl")
+model = joblib.load("models/model.pkl")
 
 df = pd.read_parquet("data/dataset.parquet")
 
